@@ -1,0 +1,54 @@
+﻿@model MayAnhPho.Areas.Administrator.Models.Nguoidung
+
+@{
+    ViewBag.Title = "Tạo mới";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+<h2>Tạo tài khoản mới</h2>
+
+
+<div>
+    <i class="fa fa-undo fa-fw"></i>@Html.ActionLink("Quay lại", "Index", "Nguoidungs")
+</div>
+@using (Html.BeginForm("Create", "Nguoidungs", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+    <div class="text-success">
+        @ViewBag.CreateTypeError
+    </div>
+        <div class="form-group col-lg-5">
+            <label>Họ tên</label>
+            @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập họ tên..." } })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Hoten)</div>
+
+            <label>Email</label>
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập email..." } })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Email)</div>
+
+            <label>Điện thoại</label>
+            @Html.EditorFor(model => model.Dienthoai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập điện thoại..." } })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Dienthoai)</div>
+
+            <label>Mật khẩu</label>
+            @Html.EditorFor(model => model.Matkhau, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mật khẩu..." } })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Matkhau)</div>
+
+            <label>Tên quyền</label>
+            @Html.DropDownListFor(model => model.IDQuyen, ViewBag.nguoidungListCreate as SelectList, new { @class = "form-control" })
+
+            <label>Địa chỉ</label>
+            @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập địa chỉ..." } })
+            <div class="text-danger">@Html.ValidationMessageFor(model => model.Diachi)</div>
+            <br />
+            <input type="submit" value="Tạo mới" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

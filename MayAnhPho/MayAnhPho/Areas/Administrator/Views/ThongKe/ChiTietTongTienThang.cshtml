@@ -1,0 +1,313 @@
+﻿@{
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    MayAnhPho.Areas.Administrator.Models.AdminContext db = new MayAnhPho.Areas.Administrator.Models.AdminContext();
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3 class="m-0 font-weight-bold text-primary" style="text-transform: uppercase; font-size: xx-large; padding: 10px; border-bottom: solid; border-color: lightskyblue;">Tổng Tiền</h3>
+    </div>
+    <div class="card-body">
+
+        <h4 class="small font-weight-bold">Tháng 1 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang1 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang1 = 0;
+                int? sum1 = 0;
+                foreach (var item in donhangthang1)
+                {
+                    sum1 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "01")
+                    {
+
+                        tongThang1 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram1 = (tongThang1 * 100) / sum1;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram1%" aria-valuenow="@tongThang1" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang1 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 2 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang2 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang2 = 0;
+                int? sum2 = 0;
+                foreach (var item in donhangthang2)
+                {
+                    sum2 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "02")
+                    {
+
+                        tongThang2 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram2 = (tongThang2 * 100) / sum2;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram2%" aria-valuenow="@tongThang2" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang2 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 3 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang3 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang3 = 0;
+                int? sum3 = 0;
+                foreach (var item in donhangthang3)
+                {
+                    sum3 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "03")
+                    {
+
+                        tongThang3 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram3 = (tongThang3 * 100) / sum3;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram3%" aria-valuenow="@tongThang3" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang3 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 4 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang4 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang4 = 0;
+                int? sum4 = 0;
+                foreach (var item in donhangthang4)
+                {
+                    sum4 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "04")
+                    {
+
+                        tongThang4 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram4 = (tongThang4 * 100) / sum4;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram4%" aria-valuenow="@tongThang4" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang4 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 5</h4>
+        <div class="progress mb-4">
+            @{ var donhangthang5 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang5 = 0;
+                int? sum5 = 0;
+                foreach (var item in donhangthang5)
+                {
+                    sum5 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "05")
+                    {
+
+                        tongThang5 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram5 = (tongThang5 * 100) / sum5;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram5%" aria-valuenow="@tongThang5" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang5 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 6 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang6 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang6 = 0;
+                int? sum6 = 0;
+                foreach (var item in donhangthang6)
+                {
+                    sum6 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "06")
+                    {
+
+                        tongThang6 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram6 = (tongThang6 * 100) / sum6;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram6%" aria-valuenow="@tongThang6" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang6 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 7 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang7 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang7 = 0;
+                int? sum7 = 0;
+                foreach (var item in donhangthang7)
+                {
+                    sum7 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "07")
+                    {
+
+                        tongThang7 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram7 = (tongThang7 * 100) / sum7;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram7%" aria-valuenow="@tongThang7" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang7 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 8 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang8 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang8 = 0;
+                int? sum8 = 0;
+                foreach (var item in donhangthang8)
+                {
+                    sum8 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "08")
+                    {
+
+                        tongThang8 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram8 = (tongThang8 * 100) / sum8;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram8%" aria-valuenow="@tongThang8" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang8 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 9 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang9 = from o in db.Orders
+                                    join od in db.OrderDetails
+                                    on o.orderID equals od.orderID
+                                    select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang9 = 0;
+                int? sum9 = 0;
+                foreach (var item in donhangthang9)
+                {
+                    sum9 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "09")
+                    {
+
+                        tongThang9 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram9 = (tongThang9 * 100) / sum9;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram9%" aria-valuenow="@tongThang9" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang9 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 10 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang10 = from o in db.Orders
+                                     join od in db.OrderDetails
+                                     on o.orderID equals od.orderID
+                                     select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang10 = 0;
+                int? sum10 = 0;
+                foreach (var item in donhangthang10)
+                {
+                    sum10 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "10")
+                    {
+
+                        tongThang10 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram10 = (tongThang10 * 100) / sum10;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram10%" aria-valuenow="@tongThang10" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang10 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 11 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang11 = from o in db.Orders
+                                     join od in db.OrderDetails
+                                     on o.orderID equals od.orderID
+                                     select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang11 = 0;
+                int? sum11 = 0;
+                foreach (var item in donhangthang11)
+                {
+                    sum11 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "11")
+                    {
+
+                        tongThang11 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram11 = (tongThang11 * 100) / sum11;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram11%" aria-valuenow="@tongThang11" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang11 VNĐ
+        </div>
+
+        <h4 class="small font-weight-bold">Tháng 12 </h4>
+        <div class="progress mb-4">
+            @{ var donhangthang12 = from o in db.Orders
+                                     join od in db.OrderDetails
+                                     on o.orderID equals od.orderID
+                                     select new { od.orderID, o.orderDateTime, od.ordtsThanhTien, o.orderStatus };
+                int? tongThang12 = 0;
+                int? sum12 = 0;
+                foreach (var item in donhangthang12)
+                {
+                    sum12 += item.ordtsThanhTien;
+                    string a = item.orderDateTime;
+                    string[] arrListStr = a.Split(new char[] { '/' });
+                    if (arrListStr[1] == "12")
+                    {
+
+                        tongThang12 += item.ordtsThanhTien;
+                    }
+                }
+                int? phanTram12 = (tongThang12 * 100) / sum12;
+                <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram12%" aria-valuenow="@tongThang12" aria-valuemin="0" aria-valuemax="10000"></div>
+            }
+            @tongThang12 VNĐ
+        </div>
+    </div>
+
+</div>

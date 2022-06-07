@@ -1,0 +1,108 @@
+﻿@model MayAnhPho.Areas.Administrator.Models.Products
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.proID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Producers.pdcName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producers.pdcName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTypes.typeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductTypes.typeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proDiscount)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proUpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proUpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proImportPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proImportPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.proID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

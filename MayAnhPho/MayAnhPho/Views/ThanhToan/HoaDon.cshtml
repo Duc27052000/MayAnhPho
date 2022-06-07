@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Hoá đơn";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+@{
+    MayAnhPho.Models.UserContext db=new MayAnhPho.Models.UserContext();
+    var cus = db.Customers.Find(Session["Phone"]);
+}
+<div class="container">
+    <div class="spec ">
+        <h3><a href="#" style="text-decoration:none;">Hoá Đơn @*@Session["MHD"]*@</a></h3>
+        <div class="ser-t">
+            <b></b>
+            <span><i></i></span>
+            <b class="line"></b>
+        </div>
+    </div>
+    <div class="alert alert-danger">
+        Hình thức thanh toán: chỉ nhận tiền mặt khi giao hàng.
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Họ và tên khách: @cus.cusFullName
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <br />
+                        Số điện thoại: @Session["Phone"]<br />
+                        Email: @cus.cusEmail<br />
+                        Địa chỉ: @cus.cusAddress<br />
+                        Ghi chú: @db.Orders.Find(Session["MHD"]).orderMessage
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    MayAnhPho
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <br />
+                        Số điện thoại: 666666666<br />
+                        Email: ducsoshi2000@gmail.com<br />
+                        Địa chỉ:Hà Nội
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Sản phẩm
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 0;
+                            int? tong = 0;
+                        }
+                        @foreach (var item in db.OrderDetails.SqlQuery("Select * from OrderDetails Where orderID='" + Session["MHD"] + "'"))
+                        {
+                            i++;
+                        <tr>
+                            <td>@i</td>
+                            <td><img src="@item.Products.proPhoto" width="50" height="50"></td>
+                            <td>@item.Products.proName</td>
+                            <td>@item.ordtsQuantity</td>
+                            <td>@item.ordtsThanhTien VNĐ</td>
+                        </tr>
+                            tong += item.ordtsThanhTien;
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Tổng tiền:</td>
+                            <td>@tong VNĐ</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

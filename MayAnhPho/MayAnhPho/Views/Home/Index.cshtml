@@ -1,0 +1,341 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+@{
+    MayAnhPho.Repository.ProductDAO proDAO = new MayAnhPho.Repository.ProductDAO();
+    MayAnhPho.Models.UserContext db = new MayAnhPho.Models.UserContext();
+}
+
+
+
+<div class="content-top " style="padding: 0px;">
+    <div class="container ">
+        <ul class="htmlcontent-item-1 row clearfix" style="list-style-type:none;">
+            <li class="htmlcontent-item-1 col-sm-3">
+                <a href="@Url.Action("ProductsBytypeName", "Products", new { name="Máy-ảnh", page=1 })" class="hoverSlideHome" title="">
+                    <img src="~/Image/banner/banner-Item1.png" class="item-img " title="" alt="" width="270" height="400" />
+                </a>
+            </li>
+            <li class="htmlcontent-item-2 col-sm-3">
+                <a href="@Url.Action("ProductsBytypeName", "Products", new { name="Phụ kiện", page=1 })" class="hoverSlideHome" title="">
+                    <img src="~/Image/banner/BANNER-Item2-.jpg" class="item-img " title="" alt="" width="570" height="227">
+                </a>
+            </li>
+            <li class="htmlcontent-item-3 col-sm-3">
+                <div class="spec ">
+                    <h3 style="text-transform: uppercase; font-weight: 700; margin-top: 50px;"><a href="@Url.Action("ProductsBestNew", "Products", new { title="Máy ảnh mới nhất", page=1 })" style="text-decoration:none;">Máy ảnh mới nhất</a></h3>
+                    <div class="ser-t-2">
+                        <b></b>
+                        <span style="background-color: white;"><i style="background-color: white;"></i></span>
+                        <b class="line"></b>
+                    </div>
+                </div>
+            </li>
+            <li class="htmlcontent-item-4 col-sm-3">
+                <a href="@Url.Action("ProductsBytypeName", "Products", new { name="Ống kính", page=1 })" class="hoverSlideHome" title="">
+                    <img src="~/Image/banner/BANNER-Item4-.jpg" class="item-img " title="" alt="" width="270" height="400">
+                </a>
+            </li>
+        </ul>
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class="tab-pane active text-style" id="tab1">
+                    <div class=" con-w3l">
+                        @{int qtt = 0;}
+                        @foreach (var item in db.Products.SqlQuery("SELECT * FROM Products ORDER BY proUpdateDate DESC"))
+                        {
+                            qtt++;
+                            if (qtt > 4)
+                            {
+                                break;
+                            }
+                            int? newPrice = (item.proPrice - (item.proPrice * item.proDiscount.Value) / 100);
+                            <div class="col-md-3 m-wthree" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })" class="offer-img">
+                                        <img src="@item.proPhoto" width="150" height="150" alt="@item.proPhoto">
+                                        @if (item.proPrice > newPrice)
+                                        {
+                                            <div class="offer"><p><span>Giảm @item.proDiscount %</span></p></div>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="women">
+                                            @if (item.proName.Length > 20)
+                                            {
+                                                <h6><a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })" data-toggle="tooltip" title="@item.proName">@item.proName.Substring(0, 19) . . .</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })">@item.proName</a></h6>
+                                            }
+                                        </div>
+                                        @*(Size: @item.proSize)*@
+                                        <div class="mid-2">
+                                            <p><label>@item.proPrice VNĐ</label><em class="item_price">@newPrice VNĐ</em></p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.Rates.Find(item.proID) != null)
+                                                {
+                                                    for (int i = 0; i < db.Rates.Find(item.proID).rateStar; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.Rates.Find(item.proID).rateStar; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.Producers.pdcPhoto" width="20" height="20" /> @item.Producers.pdcName</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-success" href="@Url.Action("ThemVaoGio", "GioHang", new { SanPhamID = item.proID })"> <span class="glyphicon glyphicon-shopping-cart"></span>  Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--image khuyến mãi-->
+        <div>
+            <img src="~/Image/banner/sigma-fujifilm.png" class="center-block" />
+        </div>
+        <!--End Image khuyến mãi-->
+        <div class="spec " style="margin-top:30px;">
+            <h3 style="text-transform: uppercase; font-weight: 700;"><a href="@Url.Action("ProductsBestDiscount", "Products", new { title="Máy ảnh giảm giá cao nhất", page=1 })" style="text-decoration:none;">Máy ảnh giảm giá cao nhất</a></h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <div class="tab-head ">
+            <div class=" tab-content tab-content-t ">
+                <div class="tab-pane active text-style" id="tab1">
+                    <div class=" con-w3l">
+                        @{int qtt1 = 0;}
+                        @foreach (var item in db.Products.SqlQuery("SELECT * FROM Products ORDER BY proDiscount DESC"))
+                        {
+                            qtt1++;
+                            if (qtt1 > 4)
+                            {
+                                break;
+                            }
+                            int? newPrice = item.proPrice - ((item.proPrice * item.proDiscount.Value) / 100);
+                            <div class="col-md-3 m-wthree" style="margin-bottom:30px;">
+                                <div class="col-m">
+                                    <a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })" class="offer-img">
+                                        <img src="@item.proPhoto" width="150" height="150" alt="@item.proPhoto">
+                                        @if (item.proPrice > newPrice)
+                                        {
+                                            <div class="offer"><p><span>Giảm @item.proDiscount %</span></p></div>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    </a>
+                                    <div class="mid-1">
+                                        <div class="women">
+                                            @if (item.proName.Length > 20)
+                                            {
+                                                <h6><a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })" data-toggle="tooltip" title="@item.proName">@item.proName.Substring(0, 19) . . .</a></h6>
+                                            }
+                                            else
+                                            {
+                                                <h6><a href="@Url.Action("ProductDetail", "Products", new { id=item.proID })">@item.proName</a></h6>
+                                            }
+                                        </div>
+                                        @*(Size: @item.proSize)*@
+                                        <div class="mid-2">
+                                            <p><label>@item.proPrice VNĐ</label><em class="item_price">@newPrice VNĐ</em></p>
+                                            <div class="clearfix"></div>
+                                            <div class="block">
+                                                @if (db.Rates.Find(item.proID) != null)
+                                                {
+                                                    for (int i = 0; i < db.Rates.Find(item.proID).rateStar; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:rgb(255, 172, 0);" />
+                                                    }
+                                                    for (int i = 0; i < 5 - db.Rates.Find(item.proID).rateStar; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <img src="~/Image/star.png" style="background-color:#b0b0b0" />
+                                                    }
+                                                }
+                                            </div>
+                                            <div>
+                                                <a href="#"><img src="@item.Producers.pdcPhoto" width="20" height="20" /> @item.Producers.pdcName</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="add">
+                                            <a class="btn btn-success" href="@Url.Action("ThemVaoGio", "GioHang", new { SanPhamID = item.proID })"> <span class="glyphicon glyphicon-shopping-cart"></span> Thêm vào giỏ </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<style>
+
+    
+    .htmlcontent-item-1 {
+        margin-left: 8px;
+    }
+    .htmlcontent-item-2 {
+        margin-left: -30px;
+    }
+    .htmlcontent-item-3 {
+        width: 500px;
+        margin-left: -240px;
+        margin-top: 260px;
+        position: relative;
+    }
+    .htmlcontent-item-4 {
+        margin-left: 5px;
+    }
+    .ser-t-2 {
+        text-align: center;
+        margin: 0 auto;
+        width: 40%;
+        position: relative;
+    }
+        .ser-t-2 b {
+            width: 100%;
+            height: 2px;
+            display: block;
+            background: #039445;
+            margin-bottom: -5px;
+            margin-top: -5px;
+        }
+        .ser-t-2 span i {
+            width: 20px;
+            height: 20px;
+            display: block;
+            border: 2px solid #039445;
+            -webkit-transform: rotate(45deg) translate3d(0, 0, 0);
+            -moz-transform: rotate(45deg) translate3d(0, 0, 0);
+            -ms-transform: rotate(45deg) translate3d(0, 0, 0);
+            -o-transform: rotate(45deg) translate3d(0, 0, 0);
+            transform: rotate(45deg) translate3d(0, 0, 0);
+            margin-left: 85px;
+        }
+    .ser-t-2 .line {
+        margin-left: 30px;
+        width: 70%;
+    }
+    .center-block {
+        width: 1130px;
+    }
+    .hoverSlideHome img {
+        -webkit-transform: scale(0.8); /*Webkit: Scale down image to 0.8x original size*/
+        -moz-transform: scale(0.8); /*Mozilla scale version*/
+        -o-transform: scale(0.8); /*Opera scale version*/
+        -webkit-transition-duration: 0.5s; /*Webkit: Animation duration*/
+        -moz-transition-duration: 0.5s; /*Mozilla duration version*/
+        -o-transition-duration: 0.5s; /*Opera duration version*/
+        opacity: 0.9; /*initial opacity of images*/
+        margin: 0 10px 5px 0; /*margin between images*/
+    }
+
+        .hoverSlideHome img:hover {
+            -webkit-transform: scale(1.1); /*Webkit: Scale up image to 1.2x original size*/
+            -moz-transform: scale(1.1); /*Mozilla scale version*/
+            -o-transform: scale(1.1); /*Opera scale version*/
+            box-shadow: 0px 0px 30px gray; /*CSS3 shadow: 30px blurred shadow all around image*/
+            -webkit-box-shadow: 0px 0px 30px gray; /*Safari shadow version*/
+            -moz-box-shadow: 0px 0px 30px gray; /*Mozilla shadow version*/
+            opacity: 1;
+        }
+
+    .toasang {
+        margin: 20px;
+        position: relative;
+        display: block;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        border-radius: 100%;
+        font: 700 30px/80px 'arial';
+        text-decoration: none;
+        color: #313131;
+        z-index: 1;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+
+        .toasang:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 100%;
+            background: #dfdfdf;
+            z-index: -1;
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            -o-transition: all .3s ease;
+            transition: all .3s ease;
+        }
+
+        .toasang:hover {
+            color: #fff;
+            background: #399;
+        }
+
+            .toasang:hover:after {
+                background: transparent;
+                -webkit-transform: scale(1.6);
+                -moz-transform: scale(1.6);
+                -ms-transform: scale(1.6);
+                -o-transform: scale(1.6);
+                transform: scale(1.6);
+            }
+</style>

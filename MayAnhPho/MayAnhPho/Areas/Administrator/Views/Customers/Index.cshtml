@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MayAnhPho.Areas.Administrator.Models.Customers>
+
+@{
+    ViewBag.Title = "Thông tin khách hàng";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin khách hàng</h2>
+<div class="text-warning">
+    @ViewBag.CusError
+</div>
+<hr />
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn btn-primary btn-default" href="@Url.Action("Index", "Customers")" role="button">Làm mới</a>
+            <div class="form-group input-group navbar-right">
+                @using (Ajax.BeginForm("Index", "Customers", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+                {
+                    <input type="search" name="searchString" class="form-control" style="width:300px" placeholder="Nhập số điện thoại khách hàng..." />
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive table-bordered">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Html.ActionLink("Số điện thoại", "Index", new { sortOrder = ViewBag.SapTheoId })</th>
+                            <th>@Html.ActionLink("Họ và tên", "Index", new { sortOrder = ViewBag.SapTheoTen })</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 0;}
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@Html.DisplayFor(modelItem => item.cusPhone)</td>
+                                <td>@Html.DisplayFor(modelItem => item.cusFullName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.cusEmail)</td>
+                                <td>@Html.DisplayFor(modelItem => item.cusAddress)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>

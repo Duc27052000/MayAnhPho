@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MayAnhPho.Areas.Administrator.Models.OrderDetails>
+
+@{
+    ViewBag.Title = "Đơn hàng";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đơn hàng</h2>
+
+
+<div class="text-warning">
+    @ViewBag.CusError
+</div>
+<hr />
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn btn-primary btn-default" href="@Url.Action("Index", "OrderDetails")" role="button">Làm mới</a>
+            <div class="form-group input-group navbar-right">
+                @using (Ajax.BeginForm("Index", "OrderDetails", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+                {
+                    <input type="search" name="searchString" class="form-control" style="width:300px" placeholder="Nhập mã hóa đơn" />
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive table-bordered">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.ActionLink("#", "Index", new { sortOrder = ViewBag.SapTheoId })</th>
+                            <th>Số điện thoại</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Ghi chú</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Orders.orderID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Orders.cusPhone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Products.proName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ordtsQuantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Orders.orderMessage)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ordtsThanhTien)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>

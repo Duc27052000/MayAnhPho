@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class=" mb-0 text-gray-800">Thống kê</h1>
+    </div>
+    <hr />
+
+
+    <!-- Content Row -->
+    <div class="row" >
+        <!-- Earnings (Monthly) Card Example -->
+        @{Html.RenderAction("SoLuongDonHang", "Home");}
+        <!-- Earnings (Monthly) Card Example -->
+        @{Html.RenderAction("TongTien", "Home");}
+        <!-- Earnings (Monthly) Card Example -->
+        @{Html.RenderAction("TongTienLai", "Home");}
+
+    </div>
+    <div class="row" style="padding: 15px;">
+        <div class="col-lg-10 mb-4" style="border: 2px solid lightskyblue">
+            @{Html.RenderAction("SanPhamConLai", "Home");}
+        </div>
+    </div>
+
+</div>
+
+

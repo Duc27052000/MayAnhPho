@@ -1,0 +1,476 @@
+﻿@{
+    MayAnhPho.Repository.ProductDAO proDAO = new MayAnhPho.Repository.ProductDAO();
+    MayAnhPho.Models.UserContext db = new MayAnhPho.Models.UserContext();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Content/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Content/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="~/Content/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- js -->
+    <script src="~/Content/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Content/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--- start-rate---->
+    <script src="~/Content/js/jstarbox.js"></script>
+    <link rel="stylesheet" href="~/Content/css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+    <!---//End-rate---->
+    <style>
+        .toasang {
+            margin: 20px;
+            position: relative;
+            display: block;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            border-radius: 100%;
+            font: 700 30px/80px 'arial';
+            text-decoration: none;
+            color: #313131;
+            z-index: 1;
+            -webkit-transition: all .3s ease;
+            -moz-transition: all .3s ease;
+            -ms-transition: all .3s ease;
+            -o-transition: all .3s ease;
+            transition: all .3s ease;
+        }
+
+            .toasang:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                border-radius: 100%;
+                background: #dfdfdf;
+                z-index: -1;
+                -webkit-transition: all .3s ease;
+                -moz-transition: all .3s ease;
+                -ms-transition: all .3s ease;
+                -o-transition: all .3s ease;
+                transition: all .3s ease;
+            }
+
+            .toasang:hover {
+                color: #fff;
+                background: #399;
+            }
+
+                .toasang:hover:after {
+                    background: transparent;
+                    -webkit-transform: scale(1.6);
+                    -moz-transform: scale(1.6);
+                    -ms-transform: scale(1.6);
+                    -o-transform: scale(1.6);
+                    transform: scale(1.6);
+                }
+        .social-top {
+            text-align: center;
+        }
+        .taikhoan {
+            text-align: right;
+            margin-left:-150px;
+        }
+        .footer-grid h4{
+            color: white;
+        }
+
+       /* .footer-bottom {
+            margin-left: 100px;
+            position: absolute;
+            margin-top: -300px;
+        }*/
+        .search-form input[type='text'] {
+            width: 93%;
+            padding: 10px;
+            outline: none;
+            font-size: 1em;
+            color: #000;
+            border: 1px solid #000;
+            background: rgba(255, 255, 255, 0.45);
+        }
+        
+        .search-form form {
+            width: 300px;
+            margin-left: 550px;
+            position: relative;
+            display: block;
+        }
+        .search-form form input placeholder {
+            color: #000;
+        }
+        .search-form form input {
+            /*background-color: rgba(0, 0, 255, 0.50);*/
+            height: 35px;
+        }
+        .search-form form button {
+            background-color: rgba(0, 0, 255, 0.50);
+            margin-top: -58px;
+            margin-left: 292px;
+        }
+        .nav {
+            margin-left: -100px;
+            margin-top: -60px;
+            /*background-color: rgb(229 216 231 / 94%);*/
+        }
+        .ser-t span {
+            background-color: white;
+        }
+        #style-6 {
+            /*background-color: rgb(229 216 231 / 94%);*/
+        }
+
+        .navbar {
+            /*background-color: rgb(229 216 231 / 94%);*/
+        }
+
+        .menu {
+            display: block;
+        }
+
+        .card {
+            display: block;
+            border: 0 solid;
+        }
+
+        #style-6::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        #style-6::-webkit-scrollbar {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #style-6::-webkit-scrollbar-thumb {
+            background-color: #F90;
+            background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
+        }
+    </style>
+</head>
+<body id="style-6" class="container-fluid">
+    @{
+        var u = Session["use"] as MayAnhPho.Models.Nguoidung;
+    }
+    
+    <div class="taikhoan">
+        @{ if (u != null)
+            {
+                <div class="col-sm-12 col-md-0" style="margin-top: 10px;margin-bottom: -30px;">
+                            <b>Xin chào :</b> @u.Hoten
+                    &nbsp;
+                    @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+                    <button><a style="color:red" href="@Url.Action("DangXuat", "User")"> ĐĂNG XUẤT</a></button>
+                </div>
+
+            }
+        }
+    </div>
+    <div class="header">
+        <div class="container">
+            <div class="logo col-sm-12 col-md-0" style="padding-bottom: 20px;">
+                <h1><a href="@Url.Action("Index", "Home")">MayAnhPho<span>Sắc Màu Cuộc Sống</span></a></h1>
+            </div>
+            <div class="head-t">
+                <ul class="card">
+                    @{ if (u != null)
+                        {
+
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Dangnhap", "User")" style="color: black"><i class="fa fa-user" aria-hidden="true"></i>Đăng nhập</a></li>
+                            <li><a href="@Url.Action("Dangky", "User")" style="color: black"><i class="fa fa-arrow-right" aria-hidden="true"></i>Đăng ký</a></li>
+                        }
+                    }
+
+                </ul>
+            </div>
+            <div class="header-ri">
+                <ul class="social-top">
+                    <li><a href="#" target="_blank" class="icon facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a></li>
+                    <li><a href="#" class="icon pinterest"><i class="fa fa-youtube-play" aria-hidden="true"></i><span></span></a></li>
+                </ul>
+            </div>
+            <div class="nav-top">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse menu" id="bs-megadropdown-tabs">
+                        <div class="search-form">
+                            @using (Ajax.BeginForm("SearchByName", "Products", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }))
+                            {
+                                <input type="text" @*style="background-color:rgba(0, 0, 255, 0.50);"*@ placeholder="Tìm kiếm..." name="name">
+                                <button type="submit" class="btn btn-default" style="background-color:rgba(0, 0, 255, 0.50);"><i class=" fa fa-search"></i></button>
+                            }
+                        </div>
+                        <ul class="nav navbar-nav " style="font-weight:700;">
+                            <li class=" "><a href="@Url.Action("Index", "Home")" class="hyper "><span>Trang chủ</span></a></li>
+                            @{
+                                //MayAnhPho.Models.UserContext db = new MayAnhPho.Models.UserContext();
+                                foreach (var itemCate in db.Categories)
+                                {
+                                    <li class="dropdown ">
+                                        <a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown"><span>@itemCate.cateName<b class="caret"></b></span></a>
+                                        <ul class="dropdown-menu">
+                                            <div class="col-sm-12">
+                                                <ul class="multi-column-dropdown">
+                                                    @foreach (var itemPt in db.ProductTypes.Where(c => c.cateID == itemCate.cateID))
+                                                    {
+                                                        <li><a href="@Url.Action("ProductsByProType", "Products", new { id = itemPt.typeID, page = 1 })"><i class="fa fa-angle-right" aria-hidden="true"></i>@itemPt.typeName</a></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <ul class="multi-column-dropdown">
+                                                    <li>
+                                                        <img src="@itemCate.catePhoto" width="100" height="50" />
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                }
+                            }
+                            <li class="dropdown ">
+                                <a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown"><span>Hãng sản xuất<b class="caret"></b></span></a>
+                                <ul class="dropdown-menu">
+                                    <div class="col-sm-12">
+                                        <ul class="multi-column-dropdown">
+                                            @foreach (var itemPdc in db.Producers)
+                                            {
+                                                <li><a href="@Url.Action("ProductsByPdc", "Products", new { id = itemPdc.pdcID, page = 1 })"><img src="@itemPdc.pdcPhoto" width="20" height="20" /> @itemPdc.pdcName</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Index", "GioiThieu")" class="hyper "><span>Giới thiệu</span></a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="cart">
+
+                    @{
+                        List<MayAnhPho.Models.CartItem> gio = Session["giohang"] as List<MayAnhPho.Models.CartItem>;
+                        if (gio == null || gio.Count == 0)
+                        {
+                            <a href="@Url.Action("Index","GioHang")"><span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge">0</span></span></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","GioHang")"><span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge">@gio.Count</span></span></a>
+                        }
+                    }
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div data-vide-bg="video/video" style="position: relative; margin-bottom: 20px; width: 100%; height: 350px; ">
+
+                <div class="container">
+
+                    <div class="banner-info" style="height:60px;">
+                        <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; background-size: cover;
+                 background-repeat: no-repeat; background-position: 50% 50%; background-image: none; height:350px">
+                            <video autoplay="autoplay" loop="loop" muted="" style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                 visibility: visible; width: auto; height: auto;">
+                                <source src="~/Image/banner/Introducing vlog camera ZV-1 _ Sony.mp4" type="video/mp4">
+                                <source src="~/Image/banner/204760033_4211741022254105_3779887738467390179_n.jpg" type="image/gif" />
+                            </video>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+
+
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-2 footer-grid">
+                <h3 ><a href="@Url.Action("Index", "GioiThieu")" style="color:white">Giới thiệu</a></h3>
+                <p>
+                    Cửa hàng máy ảnh.
+                </p>
+            </div>
+            <div class="col-md-2 footer-grid ">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    @foreach (var itemCate in db.Categories)
+                    {
+                        <li><a href="#">@itemCate.cateName</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-2 footer-grid">
+                <h3>Tài khoản</h3>
+                <ul>
+                    <li><a href="/User/Dangnhap">Đăng nhập</a></li>
+                    <li><a href="/User/Dangky">Đăng ký</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 footer-grid">
+                <h4>Phương thức thanh toán &amp; giao hàng</h4>
+                <div class="content">
+                    <div class="toasang">
+                        <img src="~/Image/icon_shipping.png" />
+                    </div>
+                    <p><strong class="bold">Miễn phí vận chuyển cho đơn hàng trên 1.000.000VNĐ</strong></p>
+                    <ul style="font-size:large;">
+                        <li class="fa fa-check-circle">
+                            <a href="#" title="">
+                                Giao hàng và thu tiền tận nơi
+                            </a>
+                        </li>
+                        <li class="fa fa-check-circle">
+                            <a href="#" title="">Chuyển khoản và giao hàng</a>
+                        </li>
+                        <li class="fa fa-check-circle">
+                            <a href="#" title="">Mua hàng tại shop</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-2 footer-grid">
+                <h4>Hỗ trợ 24/7</h4>
+                <div class="content">
+                    <div class="toasang">
+                        <img src="~/Image/icon_support.png" />
+                    </div>
+                    <p><strong>Gọi ngay cho chúng tôi khi bạn có thắc mắc</strong></p>
+                    <ul style="font-size:xx-large;">
+                        <li class="fa fa-check-circle">
+                            <strong class="big npl">666666666 </strong>
+                        </li>
+                        <li class="fa fa-check-circle">
+                            <strong class="big npl">666666666 </strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 footer-grid">
+                <h4>Thẻ thành viên</h4>
+                <div class="content">
+                    <div class="toasang">
+                        <img src="~/Image/icon_card.png" />
+                    </div>
+                    <p><strong class="bold">Chế độ ưu đãi thành viên VIP:</strong></p>
+                    <ul style="font-size:large;">
+                        <li class="fa fa-check-circle">5% cho thành viên Bạc</li>
+                        <li class="fa fa-check-circle">10% cho thành viên Vàng</li>
+                        <li class="fa fa-check-circle">15% cho thành viên Kim cương</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="copy-right">
+                <div class="footer-bottom">
+                    <h2><a href="index.html">MayAnhPho<span>Sắc Màu Cuộc Sống</span></a></h2>
+                    <ul class="social-fo">
+                        <li><a href="#" target="_blank" class=" face"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class=" twi"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class=" pin"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class=" dri"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    </ul>
+                    <div class=" address">
+                        <div class="col-md-4 fo-grid1">
+                            <p><i class="fa fa-home" aria-hidden="true"></i>Hà Nội</p>
+                        </div>
+                        <div class="col-md-4 fo-grid1">
+                            <p><i class="fa fa-phone" aria-hidden="true"></i>666666666</p>
+                        </div>
+                        <div class="col-md-4 fo-grid1">
+                            <p><a href="#"><i class="fa fa-envelope-o mail" aria-hidden="true"></i> ducsoshi2000@gmail.com</a></p>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <p> &copy; 2022 MayAnhPho. All Rights Reserved | Design by  <a target="_blank" href="#">Phạm Đức</a></p>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!-- //footer-->
+    <!-- smooth scrolling -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+            */
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <!-- //smooth scrolling -->
+    <script src="~/Content/js/bootstrap.js"></script>
+    <!-- for bootstrap working -->
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿
+@{
+    var SanPhamConLai = (List<MayAnhPho.Models.Products>)ViewBag.sanPhamConLai;
+    //Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary" style=" font-size: large; padding: 10px; border-bottom: solid; border-color: lightskyblue;">Sản phẩm còn lại</h6>
+    </div>
+    @foreach (var item in SanPhamConLai)
+    {
+<div class="card-body">
+    <h3 class="small font-weight-bold" >@item.proName<div style="float: right;"><span class="float-right">  Số lượng: @item.proQuantity</span></div> </h3>
+    <div class="progress mb-4">
+
+        @{
+            var phanTram = (item.proQuantity * 100) / 100;
+        }
+
+        <div class="progress-bar bg-info" role="progressbar" style="width: @phanTram%; color:black" aria-valuenow=@item.proQuantity aria-valuemin="0" aria-valuemax="100">  </div>
+    </div>
+</div>
+    }
+
+</div>
+
+
